@@ -17,6 +17,7 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "axios": "^0.9.1",
     "babel-preset-stage-1": "^6.1.18",
     "fbjs": "^0.8.0-alpha.3",
     "lodash": "^3.10.1",
@@ -24,6 +25,7 @@
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
     "react-router": "2.0.0-rc5",
-    "redux": "^3.0.4"
+    "redux": "^3.0.4",
+    "redux-promise": "^0.5.1"
   }
 }
