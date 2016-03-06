@@ -9,8 +9,8 @@ class PostsNew extends Component {
     };
 
     onSubmit(props) {
-        this.props.createPost(props).then(() => {
-            this.context.router.push('/');
+        this.props.createPost(props).then(response => {
+            this.context.router.push(`/posts/${response.payload.data.id}`);
         });
     }
 
