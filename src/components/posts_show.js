@@ -1,9 +1,19 @@
-import React, {Component} from "react";
+import React, {Component, PropTypes} from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router";
 import {loadPost} from "../actions/index";
+import {deletePost} from "../actions/index";
 
 class PostsShow extends Component {
+    static contextTypes = {
+        router: PropTypes.object
+    };
+
+    onDelete() {
+        this.props.deletePost(this.props.params.id).then(()=>{
+            this.context.router.push('/');
+        });
+    }
 
     componentWillMount() {
         this.props.loadPost(this.props.params.id);
@@ -17,11 +27,12 @@ class PostsShow extends Component {
         return (
             <div>
                 <div>
+                    <Link to="/">Back to Index</Link>
+                    <button className="btn btn-danger pull-xs-right" onClick={this.onDelete.bind(this)}>Delete</button>
                     <h3>{post.title}</h3>
                     <h6>Categories: {post.categories}</h6>
                     <p>{post.content}</p>
                 </div>
-                <Link className="btn btn-primary" to="/">Back to list</Link>
             </div>
         );
     }
@@ -33,4 +44,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {loadPost})(PostsShow);
+export default connect(mapStateToProps, {loadPost, deletePost})(PostsShow);
