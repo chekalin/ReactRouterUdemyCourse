@@ -11,14 +11,23 @@ class PostsNew extends Component {
                 <div className="formGroup">
                     <label>Title</label>
                     <input type="text" className="form-control" {...title}/>
+                    <div className="text-help">
+                        {title.touched ? title.error : ''}
+                    </div>
                 </div>
                 <div className="formGroup">
                     <label>Categories</label>
                     <input type="text" className="form-control" {...categories}/>
+                    <div className="text-help">
+                        {categories.touched ? categories.error : ''}
+                    </div>
                 </div>
                 <div className="formGroup">
                     <label>Content</label>
                     <textarea className="form-control" {...content}/>
+                    <div className="text-help">
+                        {content.touched ? content.error : ''}
+                    </div>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
@@ -26,7 +35,22 @@ class PostsNew extends Component {
     }
 }
 
+function validate(values) {
+    const errors = {};
+    if (!values.title) {
+        errors.title = 'Enter title';
+    }
+    if (!values.categories) {
+        errors.categories = 'Enter categories';
+    }
+    if (!values.content) {
+        errors.content = 'Enter content';
+    }
+    return errors;
+}
+
 export default reduxForm({
     form: 'PostsNewForm',
-    fields: ['title', 'categories', 'content']
+    fields: ['title', 'categories', 'content'],
+    validate
 }, null, {createPost})(PostsNew);
